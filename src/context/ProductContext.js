@@ -1,25 +1,23 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { getAllProducts } from "../api/Api";
 
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const products = [
-    {
-      title: "Сумка",
-      price: 600,
-      id: 0,
-    },
-    {
-      title: "Барсетка",
-      price: 800,
-      id: 1,
-    },
-    {
-      title: "Саквояж",
-      price: 1800,
-      id: 2,
-    },
-  ];
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const data = await getAllProducts();
+        if(!data) return;
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetch products: ', error);
+      }
+    }
+    fetchData();
+  }, [])
 
   return (
     <ProductContext.Provider value={products}>

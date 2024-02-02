@@ -16,6 +16,9 @@ function Layout() {
                     <li>
                         <NavLink to='/contact'>Contacts</NavLink>
                     </li>
+                    <li>
+                        <NavLink to='/cart'>Cart</NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>
